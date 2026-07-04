@@ -10,6 +10,7 @@ in
 
   imports = [
     # services
+    ../../services/k3s
     ../../services/tailscale
 
     # users
