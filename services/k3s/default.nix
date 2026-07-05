@@ -14,6 +14,12 @@
     role = "server";
     disableAgent = false;
 
+    # let wheel use kubectl without sudo, since they could elevate to use it anyway
+    extraFlags = [
+      "--write-kubeconfig-mode 640"
+      "--write-kubeconfig-group wheel"
+    ];
+
     # attempt to stop pods cleanly on host shutdown, delaying host shutdown if needed
     gracefulNodeShutdown = {
       enable = true;
