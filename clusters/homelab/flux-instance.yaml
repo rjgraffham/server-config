@@ -41,6 +41,6 @@ spec:
                 operator: "Exists"          
   sync:
     kind: GitRepository
-    url: "https://github.com/rjgraffham/nixos-config-server"
+    url: "https://github.com/rjgraffham/server-config"
     ref: "refs/heads/kubernetes"
     path: "clusters/homelab"
