@@ -45,6 +45,9 @@
               exposedPort: 9080
             websecure:
               exposedPort: 9443
+          providers:
+            kubernetesGateway:
+              enabled: true
         '';
       };
     };
