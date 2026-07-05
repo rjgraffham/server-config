@@ -20,6 +20,33 @@
       shutdownGracePeriod = "1m";
       shutdownGracePeriodCriticalPods = "15s";
     };
+
+    manifests."traefik-config".content = {
+      apiVersion = "helm.cattle.io/v1";
+      kind = "HelmChartConfig";
+      metadata = {
+        name = "traefik";
+        namespace = "kube-system";
+      };
+      spec = {
+        valuesContent = ''
+          additionalArguments:
+            - "--certificatesresolvers.default.acme.email=psquid@psquid.net"
+            - "--certificatesresolvers.default.acme.storage=/data/acme.json"
+            - "--certificatesresolvers.default.acme.httpchallenge.entrypoint=web"
+          ports:
+            web:
+              exposedPort: 9080
+            websecure:
+              exposedPort: 9443
+        '';
+      };
+    };
+
   };
+
+  # open firewall on temp web ports
+  networking.firewall.allowedTCPPorts = [ 9080 9443 ];
+  networking.firewall.allowedUDPPorts = [ 9443 ];
 
 }
