@@ -10,3 +10,15 @@ patches:  # patch out the upstream yaml's empty secret - will be created out of 
         name: operator-oauth
         namespace: tailscale
       $patch: delete
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: operator
+        namespace: tailscale
+      spec:
+        containers:
+          - name: operator
+            env:
+            - name: APISERVER_PROXY
+              value: "true"
