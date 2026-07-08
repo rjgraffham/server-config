@@ -22,3 +22,4 @@ patches:  # patch out the upstream yaml's empty secret - will be created out of 
             env:
             - name: APISERVER_PROXY
               value: "true"
+              $patch: replace
