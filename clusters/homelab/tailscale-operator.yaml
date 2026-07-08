@@ -11,10 +11,3 @@ spec:
     name: flux-system
   path: ./tailscale-operator
   prune: true
-  patches:  # patch out the upstream yaml's empty secret - will be created out of band
-    - patch: |
-        - op: delete
-      target:
-        kind: Secret
-        name: operator-oauth
-        namespace: tailscale
