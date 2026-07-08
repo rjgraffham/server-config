@@ -1,0 +1,31 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tailscale
+  namespace: flux-system
+spec:
+  url: https://github.com/tailscale/tailscale
+  ref:
+    name: refs/heads/main
+  interval: 15m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tailscale-operator
+  namespace: flux-system
+spec:
+  interval: 15m
+  targetNamespace: tailscale
+  sourceRef:
+    kind: GitRepository
+    name: tailscale
+  path: ./cmd/k8s-operator/deploy/manifests/operator.yaml
+  prune: true
+  patches:  # patch out the yaml's empty secret - will be created out of band
+    - patch: |
+        - op: delete
+      target:
+        kind: Secret
+        name: operator-oauth
+        namespace: tailscale
