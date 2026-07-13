@@ -23,7 +23,6 @@ spec:
      spec:
       interval: 30m
       releaseName: << inputs.provider.name >>
-      serviceAccountName: << inputs.provider.name >>
       chart:
         spec:
           chart: tailscale-operator
