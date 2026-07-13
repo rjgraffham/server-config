@@ -38,11 +38,9 @@ spec:
       valuesFrom:
         - kind: Secret
           name: tailscale-oauth
-          namespace: default
           valuesKey: clientId
           targetPath: oauth.clientId
         - kind: Secret
           name: tailscale-oauth
-          namespace: default
           valuesKey: clientSecret
           targetPath: oauth.clientSecret
