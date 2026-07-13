@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-    version: "^1.0.0"
+    - version: "^1.0.0"
   resources:
    - apiVersion: source.toolkit.fluxcd.io/v1
      kind: HelmRepository
