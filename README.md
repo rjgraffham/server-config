@@ -37,7 +37,6 @@ The configuration is intended to be as hands-off as possible, with Flux ensuring
 Once these steps are run, Flux will work through the components of the cluster definition, reconciling them with the state of the system, and when this is complete, the system will be fully deployed.
 
 
----
 
 <!-- Footnotes -->
 [^1]: Input hashing and binary caches minimize the actual rebuilds, so it's not as bad as it sounds, but it still at minimum has to evaluate the whole thing. There are probably ways to break out system components so they can be built (and thus updated) separately, but I suspect this would instead run into problems with keeping their nixpkgs sources synchronized.
