@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: linkding
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - linkding.psquid.net
+    secretName: linkding-psquid-net-tls
+  rules:
+  - host: linkding.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: linkding-web
+            port:
+              number: 80

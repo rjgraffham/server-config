@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkding-web
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: linkding
+  ports:
+  - port: 80
+    targetPort: 9090
