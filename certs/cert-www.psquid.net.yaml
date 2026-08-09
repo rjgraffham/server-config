@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: www
+  namespace: default
+spec:
+  secretName: www-psquid-net-tls
+  dnsNames:
+  - psquid.net
+  - www.psquid.net
+  issuerRef:
+    name: digitalocean-dns
+    kind: ClusterIssuer
