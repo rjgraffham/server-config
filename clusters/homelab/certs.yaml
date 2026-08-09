@@ -26,6 +26,8 @@ spec:
       name: certs
       namespace: flux-system
     spec:
+      interval: 10m
+      prune: true
       sourceRef:
         apiVersion: source.toolkit.fluxcd.io/v1
         kind: GitRepository
