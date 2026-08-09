@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: cluster-config
+  namespace: flux-system
+spec:
+  url: https://github.com/rjgraffham/server-config
+  ref: kubernetes
