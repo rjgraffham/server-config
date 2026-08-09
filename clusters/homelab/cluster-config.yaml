@@ -7,3 +7,4 @@ spec:
   url: https://github.com/rjgraffham/server-config
   ref:
     branch: kubernetes
+  interval: 10m
