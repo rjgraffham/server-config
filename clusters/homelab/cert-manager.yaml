@@ -1,0 +1,40 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  inputs:
+    - version: "1.21.x"
+  resources:
+   - apiVersion: source.toolkit.fluxcd.io/v1
+     kind: HelmRepository
+     metadata:
+      name: << inputs.provider.name >>
+      namespace: << inputs.provider.namespace >>
+     spec:
+      interval: 30m
+      type: oci
+      url: oci://quay.io/jetstack/charts
+   - apiVersion: helm.toolkit.fluxcd.io/v2
+     kind: HelmRelease
+     metadata:
+        name: << inputs.provider.name >>
+        namespace: << inputs.provider.namespace >>
+     spec:
+      interval: 30m
+      releaseName: << inputs.provider.name >>
+      targetNamespace: cert-manager
+      install:
+        createNamespace: true
+      chart:
+        spec:
+          chart: cert-manager
+          version: << inputs.version | quote >>
+          sourceRef:
+            kind: HelmRepository
+            name: << inputs.provider.name >>
+            namespace: << inputs.provider.namespace >>
+      values:
+        crds:
+          enabled: true
