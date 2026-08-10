@@ -1,4 +1,3 @@
 resources:
 - digitalocean-issuer.yaml
-- cert-linkding.psquid.net.yaml
-- cert-www.psquid.net.yaml
+- cert-psquid.net.yaml

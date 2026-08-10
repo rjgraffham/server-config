@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - linkding.psquid.net
-    secretName: linkding-psquid-net-tls
+    secretName: psquid-net-tls
   rules:
   - host: linkding.psquid.net
     http:
