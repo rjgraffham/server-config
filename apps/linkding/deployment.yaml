@@ -19,7 +19,7 @@ spec:
           claimName: linkding-data-claim
       containers:
       - name: app
-        image: sissbruecker/linkding:latest
+        image: sissbruecker/linkding:latest@sha256:45ab921bb772ea24cb05f36d35853f78c7141d932cdc5b30a39b626830908e27
         volumeMounts:
         - name: data
           mountPath: /etc/linkding/data
