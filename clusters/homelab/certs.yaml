@@ -16,7 +16,7 @@ spec:
     ready: true
   - apiVersion: source.toolkit.fluxcd.io/v1
     kind: GitRepository
-    name: cluster-config
+    name: flux-system
     namespace: flux-system
     ready: true
   resources:
@@ -31,6 +31,6 @@ spec:
       sourceRef:
         apiVersion: source.toolkit.fluxcd.io/v1
         kind: GitRepository
-        name: cluster-config
+        name: flux-system
         namespace: flux-system
       path: ./certs
