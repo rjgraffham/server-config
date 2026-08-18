@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - immich.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: immich.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: immich-web
+            port:
+              number: 80

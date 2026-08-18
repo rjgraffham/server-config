@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/immich
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 15Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-data-claim
+  namespace: default
+spec:
+  storageClassName: ""
+  volumeName: immich-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15Gi
