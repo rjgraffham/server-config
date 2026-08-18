@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homeassistant
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - ha.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: ha.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: homeassistant-web
+            port:
+              number: 80

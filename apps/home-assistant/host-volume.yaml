@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: homeassistant-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/homeassistant
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homeassistant-data-claim
+  namespace: default
+spec:
+  storageClassName: ""
+  volumeName: homeassistant-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

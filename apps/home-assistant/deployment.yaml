@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: homeassistant-data-claim
+      securityContext:
+        runAsUser: 3218
+        runAsGroup: 3218
+      containers:
+      - name: app
+        image: ghcr.io/home-assistant/home-assistant:stable@sha256:56690a89c79a0de98035e1719f8324a92d5859c1192ff45adb0230ea81cb42a5
+        env:
+        - name: TZ
+          value: "Europe/London"
+        volumeMounts:
+        - name: data
+          mountPath: /config
+        ports:
+        - containerPort: 8123
