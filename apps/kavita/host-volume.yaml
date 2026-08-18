@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kavita-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/kavita
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 40Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kavita-data-claim
+  namespace: default
+spec:
+  storageClassName: ""
+  volumeName: kavita-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 40Gi

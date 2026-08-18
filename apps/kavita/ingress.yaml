@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kavita
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - kavita.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: kavita.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kavita-web
+            port:
+              number: 80

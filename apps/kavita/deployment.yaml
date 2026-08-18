@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kavita
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+  template:
+    metadata:
+      labels:
+        app: kavita
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: kavita-data-claim
+      securityContext:
+        runAsUser: 1993
+        runAsGroup: 1993
+      containers:
+      - name: app
+        image: ghcr.io/kareadita/kavita:latest@sha256:880a8feff0833e860575f8e08788e4b4f59f8659afd17206566aae88a525130d
+        env:
+        - name: TZ
+          value: "Europe/London"
+        volumeMounts:
+        - name: data
+          mountPath: /kavita/config
+          subPath: config
+        - name: data
+          mountPath: /library
+          subPath: library
+        ports:
+        - containerPort: 5000
