@@ -17,6 +17,9 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: audiobookshelf-data-claim
+      securityContext:
+        runAsUser: 1337
+        runAsGroup: 1337
       containers:
       - name: app
         image: ghcr.io/advplyr/audiobookshelf:latest@sha256:180acad33d69c99ed208676465d8edcb268fa46967735579a7810859885b1a8e
