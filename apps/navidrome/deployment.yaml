@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: navidrome
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: navidrome-data-claim
+      - name: syncthing
+        persistentVolumeClaim:
+          claimName: syncthing-data-claim
+      securityContext:
+        runAsUser: 3354
+        runAsGroup: 3354
+      containers:
+      - name: app
+        image: deluan/navidrome:latest@sha256:9012939114fbb1bb641b81cf96dec5ded15f0aafefe8d47a511d7cb919658e40
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: syncthing
+          mountPath: /music
+          subPath: data/Music
+          readOnly: true
+        ports:
+        - containerPort: 4533

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-web
+  namespace: default
+  annotations:
+    tailscale.com/hostname: syncthing
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app: syncthing
+  ports:
+  - port: 80
+    targetPort: 8384

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: syncthing
+  template:
+    metadata:
+      labels:
+        app: syncthing
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: syncthing-data-claim
+      securityContext:
+        runAsUser: 4838
+        runAsGroup: 4838
+        fsGroup: 3354
+      containers:
+      - name: app
+        image: syncthing/syncthing:2@sha256:8c8ff37ab6aa8be23b700648a90fa9412e214852e9fd6ea8477c8334792daec0
+        volumeMounts:
+        - name: data
+          mountPath: /var/syncthing/config
+          subPath: config
+        - name: data
+          mountPath: /Sync
+          subPath: data
+        ports:
+        - containerPort: 8384

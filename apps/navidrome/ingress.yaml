@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: navidrome
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - music.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: music.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: navidrome-web
+            port:
+              number: 80
