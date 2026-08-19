@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo
+  template:
+    metadata:
+      labels:
+        app: forgejo
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: forgejo-data-claim
+      containers:
+      - name: app
+        image: codeberg.org/forgejo/forgejo:16@sha256:2fdfe28b5c68f82f49580e227b84e2afb43af0250e0631a54a386ef3b1d9b759
+        env:
+        - name: USER_UID
+          value: "1000"
+        - name: USER_GID
+          value: "1000"
+        - name: TZ
+          value: "Europe/London"
+        - name: FORGEJO__database__DB_TYPE
+          value: postgres
+        - name: FORGEJO__database__HOST
+          value: "localhost:5432"
+        - name: FORGEJO__database__NAME
+          value: forgejo
+        - name: FORGEJO__database__USER
+          value: forgejo
+        - name: FORGEJO__database__PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: forgejo
+              key: POSTGRES_PASSWORD
+        volumeMounts:
+        - name: data
+          mountPath: /data
+          subPath: data
+        ports:
+        - containerPort: 30022
+        - containerPort: 3000
+      - name: db
+        image: postgres:14@sha256:2fdfb9b432d4a73bd3eea3d989752c1e669b68d502347e0bfd2cc6d709f3d6b4
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+        env:
+        - name: POSTGRES_DB
+          value: forgejo
+        - name: POSTGRES_USER
+          value: forgejo
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: forgejo
+              key: POSTGRES_PASSWORD
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+          subPath: database
