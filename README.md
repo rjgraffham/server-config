@@ -45,5 +45,5 @@ Once these steps are run, Flux will work through the components of the cluster d
 <!-- Links referenced in the main body -->
 <!-- TODO: Update the nixos link here if and when I break out the configs into distinct repos -->
 [fluxcd]: https://fluxcd.io/
-[nixos-config]: https://github.com/rjgraffham/server-config/tree/main
-[quadlet-config]: https://github.com/rjgraffham/server-config/tree/containers
+[nixos-config]: https://github.com/rjgraffham/server-config/tree/nix
+[quadlet-config]: https://github.com/rjgraffham/server-config/tree/quadlets
