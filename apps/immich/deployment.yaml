@@ -44,9 +44,11 @@ spec:
           value: immich
         - name: DB_USERNAME
           value: postgres
-        envFrom:
-        - secretRef:
-            name: immich
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: immich
+              key: POSTGRES_PASSWORD
         volumeMounts:
         - name: data
           mountPath: /data
@@ -62,9 +64,11 @@ spec:
           value: immich
         - name: POSTGRES_USER
           value: postgres
-        envFrom:
-        - secretRef:
-            name: immich
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: immich
+              key: POSTGRES_PASSWORD
         volumeMounts:
         - name: data
           mountPath: /var/lib/postgresql/data

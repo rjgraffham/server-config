@@ -23,20 +23,29 @@ spec:
       containers:
       - name: app
         image: ghcr.io/miniflux/miniflux:latest@sha256:49d7b60987616387c306a8023087b31f2c9b7b21288b523026cb04058e8b6dbb
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: miniflux
+              key: DATABASE_URL
         envFrom:
         - configMapRef:
-            name: miniflux
-        - secretRef:
             name: miniflux
         ports:
         - containerPort: 8080
       - name: db
         image: postgres:18@sha256:06cad38a5d9f5d24b4d83d86def30795d5e4b757fedbf5281172b576dedcd941
-        envFrom:
-        - configMapRef:
-            name: miniflux
-        - secretRef:
-            name: miniflux
+        env:
+        - name: POSTGRES_DB
+          value: miniflux
+        - name: POSTGRES_USER
+          value: miniflux
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: miniflux
+              key: POSTGRES_PASSWORD
         volumeMounts:
         - name: data
           mountPath: /var/lib/postgresql
