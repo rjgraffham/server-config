@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: caddyfile
+  namespace: default
+data:
+  Caddyfile: |
+    {
+      # k8s ingress is already terminating TLS and cert-manager is already acquiring certs
+      auto_https off
+    }
+
+    http://jellyfin.psquid.net {
+      reverse_proxy paimon-windows.raven-ghost.ts.net:8096
+    }
+
+    http://www.psquid.net {
+      redir https://{labels.1}.{labels.0}{uri}
+    }
+
+    http://psquid.net {
+      root /srv/sites/www.psquid.net
+      file_server
+    }
+
+    http://dl.psquid.net {
+      @cors-all path /uikit/* *.eot *.ttf *.woff *.woff2
+
+      root /srv/sites/dl.psquid.net/html
+      file_server
+
+      header @cors-all {
+        Access-Control-Allow-Origin "*"
+      }
+    }
+
+    http://dl-public.psquid.net {
+      root /srv/sites/dl-public.psquid.net/html
+      file_server browse
+    }

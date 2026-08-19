@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: caddy
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - jellyfin.psquid.net
+    - www.psquid.net
+    - psquid.net
+    - dl.psquid.net
+    - dl-public.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: "*.psquid.net"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: caddy-web
+            port:
+              number: 80
+  - host: psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: caddy-web
+            port:
+              number: 80

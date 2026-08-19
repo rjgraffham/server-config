@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caddy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caddy
+  template:
+    metadata:
+      labels:
+        app: caddy
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: caddy-data-claim
+      - name: caddyfile
+        configMap:
+          name: caddyfile
+      securityContext:
+        runAsUser: 4146
+        runAsGroup: 4146
+      containers:
+      - name: app
+        image: caddy:2@sha256:df7f1c2fb114453b951de51a98efc010db1655a92c2e86be6706714e2417a78d
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: data
+          mountPath: /config
+          subPath: config
+        - name: data
+          mountPath: /data
+          subPath: data
+        - name: data
+          mountPath: /srv/sites
+          subPath: sites
+          readOnly: true
+        - name: caddyfile
+          mountPath: /etc/caddy
+          readOnly: true
