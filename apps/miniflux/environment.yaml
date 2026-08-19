@@ -18,5 +18,3 @@ data:
   TZ: "Europe/London"
   WATCHDOG: "1"
   WEBAUTHN: "1"
-  POSTGRES_DB: "miniflux"
-  POSTGRES_USER: "miniflux"
