@@ -6,35 +6,49 @@ metadata:
 data:
   Caddyfile: |
     {
-      # k8s ingress is already terminating TLS and cert-manager is already acquiring certs
-      auto_https off
+    	# k8s ingress is already terminating TLS and cert-manager is already acquiring certs
+    	auto_https off
     }
-
+    
     http://jellyfin.psquid.net {
-      reverse_proxy paimon-windows.raven-ghost.ts.net:8096
+    	reverse_proxy paimon-windows.raven-ghost.ts.net:8096
     }
-
+    
     http://www.psquid.net {
-      redir https://{labels.1}.{labels.0}{uri}
+    	redir https://{labels.1}.{labels.0}{uri}
     }
-
+    
     http://psquid.net {
-      root /srv/sites/www.psquid.net
-      file_server
+    	root /srv/sites/www.psquid.net
+    	file_server
     }
-
+    
     http://dl.psquid.net {
-      @cors-all path /uikit/* *.eot *.ttf *.woff *.woff2
-
-      root /srv/sites/dl.psquid.net/html
-      file_server
-
-      header @cors-all {
-        Access-Control-Allow-Origin "*"
-      }
+    	@cors-all path /uikit/* *.eot *.ttf *.woff *.woff2
+    
+    	root /srv/sites/dl.psquid.net/html
+    	file_server
+    
+    	header @cors-all {
+    		Access-Control-Allow-Origin "*"
+    	}
     }
-
+    
     http://dl-public.psquid.net {
-      root /srv/sites/dl-public.psquid.net/html
-      file_server browse
+    	root /srv/sites/dl-public.psquid.net/html
+    	file_server browse
+    }
+    
+    :80 {
+    	# catchall for any request not matched by a vhost above
+    	handle /sitespecial.css {
+    		root * /srv/sites/html
+    		file_server
+    	}
+    
+    	handle {
+    		root * /srv/sites/html
+    		rewrite * nonexistent.html
+    		file_server
+    	}
     }
