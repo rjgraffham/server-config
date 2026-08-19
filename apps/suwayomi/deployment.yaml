@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suwayomi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: suwayomi
+  template:
+    metadata:
+      labels:
+        app: suwayomi
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: suwayomi-data-claim
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+      - name: app
+        image: ghcr.io/suwayomi/suwayomi-server:preview@sha256:d5a2da7f1579fd016b3e2a69155ca147a6ee79d39dcabf1038ef9b2da2c911b2
+        env:
+        - name: TZ
+          value: "Etc/UTC"
+        volumeMounts:
+        - name: data
+          mountPath: /home/suwayomi/.local/share/Tachidesk
+        ports:
+        - containerPort: 4567
+      - name: ereadifier
+        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:76ad5d9eafad84f3356c1fb6e8b50a29fa2cdaf15c2d47cbdba99c96ef33e610
+        env:
+        - name: EREADIFIER_DIMENSIONS
+          value: clara
+        - name: EREADIFIER_ENCODE
+          value: smallest
+        - name: EREADIFIER_LOSSY_QUALITY
+          value: "85"
+        - name: EREADIFIER_DOUBLE_PAGE
+          value: wider
+        - name: EREADIFIER_LISTEN
+          value: 127.0.0.1:5656
