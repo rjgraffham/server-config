@@ -42,5 +42,5 @@ spec:
   sync:
     kind: GitRepository
     url: "https://github.com/rjgraffham/server-config"
-    ref: "refs/heads/kubernetes"
+    ref: "refs/heads/main"
     path: "clusters/homelab"
