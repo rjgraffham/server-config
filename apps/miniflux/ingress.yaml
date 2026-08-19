@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: miniflux
+  namespace: default
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - reader.psquid.net
+    secretName: psquid-net-tls
+  rules:
+  - host: reader.psquid.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: miniflux-web
+            port:
+              number: 80

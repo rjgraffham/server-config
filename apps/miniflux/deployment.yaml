@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miniflux
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: miniflux-data-claim
+      securityContext:
+        runAsUser: 8080
+        runAsGroup: 8080
+      containers:
+      - name: app
+        image: ghcr.io/miniflux/miniflux:latest@sha256:49d7b60987616387c306a8023087b31f2c9b7b21288b523026cb04058e8b6dbb
+        envFrom:
+        - configMapRef:
+            name: miniflux
+        - secretRef:
+            name: miniflux
+        ports:
+        - containerPort: 8080
+      - name: db
+        image: postgres:18@sha256:06cad38a5d9f5d24b4d83d86def30795d5e4b757fedbf5281172b576dedcd941
+        envFrom:
+        - configMapRef:
+            name: miniflux
+        - secretRef:
+            name: miniflux
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: miniflux
+  namespace: default
+data:
+  BASE_URL: "https://reader.psquid.net/"
+  BATCH_SIZE: "150"
+  CLEANUP_ARCHIVE_READ_DAYS: "-1"
+  CLEANUP_ARCHIVE_UNREAD_DAYS: "-1"
+  FETCH_YOUTUBE_WATCH_TIME: "1"
+  LISTEN_ADDR: "0.0.0.0:8080"
+  POLLING_FREQUENCY: "5"
+  POLLING_PARSING_ERROR_LIMIT: "10"
+  POLLING_SCHEDULER: "round_robin"
+  RUN_MIGRATIONS: "1"
+  SCHEDULER_ROUND_ROBIN_MIN_INTERVAL: "60"
+  TZ: "Europe/London"
+  WATCHDOG: "1"
+  WEBAUTHN: "1"
+  POSTGRES_DB: "miniflux"
+  POSTGRES_USER: "miniflux"
