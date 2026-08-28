@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup
+  namespace: default
+spec:
+  schedule: "0 */6 * * *"
+  replicas: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+          - name: data
+            persistentVolumeClaim:
+              claimName: backup-data-claim
+          - name: secrets
+            secret:
+              secretName: backup-ssh
+              defaultMode: 0600
+          containers:
+          - name: runner
+            image: ghcr.io/rjgraffham/backup-runner:latest@sha256:913c85390c103635a42523e5ce35c8d1081a39d0d30c8637b23d4badee598f60
+            volumeMounts:
+            - name: data
+              mountPath: /data
+              readOnly: true
+            - name: secrets
+              mountPath: /secrets
+              readOnly: true
+          restartPolicy: OnFailure

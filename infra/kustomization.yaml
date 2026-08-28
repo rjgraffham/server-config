@@ -1,3 +1,4 @@
 resources:
 - flux-operator.yaml
 - tailscale-operator.yaml
+- backup
