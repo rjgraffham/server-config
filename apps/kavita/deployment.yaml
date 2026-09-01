@@ -22,7 +22,7 @@ spec:
         runAsGroup: 1993
       containers:
       - name: app
-        image: ghcr.io/kareadita/kavita:latest@sha256:880a8feff0833e860575f8e08788e4b4f59f8659afd17206566aae88a525130d
+        image: ghcr.io/kareadita/kavita:latest@sha256:454f2a77ac740b70c58cc7300a11122fc9ce7b7e2161ef5b0d1df8f81067cc85
         env:
         - name: TZ
           value: "Europe/London"
