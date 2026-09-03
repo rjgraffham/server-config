@@ -36,16 +36,10 @@ spec:
         - containerPort: 8080
         startupProbe:
           httpGet:
-            path: /liveness
+            path: /readiness
             port: 8080
           failureThreshold: 12  # 12 * 10s = 2 minutes startup leeway
           periodSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /liveness
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 30
         readinessProbe:
           httpGet:
             path: /readiness
