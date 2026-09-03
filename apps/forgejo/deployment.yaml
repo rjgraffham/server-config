@@ -47,6 +47,18 @@ spec:
         ports:
         - containerPort: 30022
         - containerPort: 3000
+        startupProbe:
+          httpGet:
+            path: /api/healthz
+            port: 3000
+          failureThreshold: 12  # 12 * 10s = 2 minutes startup leeway
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/healthz
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 30
       - name: db
         image: postgres:18@sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280
         securityContext:
