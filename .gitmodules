@@ -1,0 +1,3 @@
+[submodule "infra/headlamp/upstream"]
+	path = apps/headlamp/upstream
+	url = https://github.com/kubernetes-sigs/headlamp

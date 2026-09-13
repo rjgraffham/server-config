@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: headlamp
+  namespace: kube-system
+  annotations:
+    tailscale.com/hostname: headlamp
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
