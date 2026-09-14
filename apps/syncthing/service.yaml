@@ -3,11 +3,8 @@ kind: Service
 metadata:
   name: syncthing-web
   namespace: default
-  annotations:
-    tailscale.com/hostname: syncthing
 spec:
-  type: LoadBalancer
-  loadBalancerClass: tailscale
+  type: ClusterIP
   selector:
     app: syncthing
   ports:
