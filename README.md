@@ -1,7 +1,7 @@
 # RJ's Server Config
 
 
-My server configuration, defined as kubernetes objects and deployed automatically on push via [Flux][fluxcd].
+My server configuration, defined as kubernetes objects and reconciled automatically from this repo via [Flux][fluxcd].
 
 As of right now it defines a single-node cluster, so it does not benefit from many of the advantages of a cluster, but it leaves future expansion open, and it still benefits from the ability to rely on kubernetes features like rolling updates.
 
