@@ -1,4 +1,3 @@
 resources:
 - upstream/kubernetes-headlamp.yaml
-patches:
-- path: tailscale-hostname.yaml
+- ingress.yaml
