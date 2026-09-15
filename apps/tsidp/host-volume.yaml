@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tsidp-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/tsidp
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tsidp-data-claim
+  namespace: default
+spec:
+  storageClassName: ""
+  volumeName: tsidp-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
