@@ -2,3 +2,4 @@ resources:
 - flux-operator.yaml
 - tailscale-operator.yaml
 - backup
+- oidc-cluster-admin.yaml
