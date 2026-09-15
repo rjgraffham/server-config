@@ -1,0 +1,21 @@
+- op: test  # ensure that the list of containers has not been rearranged
+  path: /spec/template/spec/containers/0/name
+  value: headlamp
+- op: add  # then, add additional environment variables
+  path: /spec/template/spec/containers/0/env/0
+  value:
+    name: HEADLAMP_CONFIG_OIDC_CLIENT_ID
+    value: b6d530a3283089ef2fa316dc7608baf1
+- op: add
+  path: /spec/template/spec/containers/0/env/0
+  value:
+    name: HEADLAMP_CONFIG_OIDC_IDP_ISSUER_URL
+    value: https://idp.raven-ghost.ts.net
+- op: add
+  path: /spec/template/spec/containers/0/env/0
+  value:
+    name: HEADLAMP_CONFIG_OIDC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: headlamp
+        key: OIDC_CLIENT_SECRET
