@@ -48,7 +48,7 @@ spec:
         - containerPort: 30022
         - containerPort: 3000
       - name: db
-        image: postgres:18@sha256:10037cee1d5ebfc057cd71b3365466cf27ce8d4bd0c4f409e426fcb2b3fb12e7
+        image: postgres:18@sha256:86c951e05bf56c93d95d397747fb8820ac76cc3bedb78f43abd83eedbe3666ae
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
