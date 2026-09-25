@@ -19,8 +19,7 @@ spec:
           claimName: syncthing-data-claim
       securityContext:
         runAsUser: 4838
-        runAsGroup: 4838
-        fsGroup: 3354
+        runAsGroup: 3354
       containers:
       - name: app
         image: syncthing/syncthing:2@sha256:397aa00b92b48d65540ea3ae3cbf271b87bdccbe07a0b7bd7d2debc3a7b29138
