@@ -40,6 +40,20 @@ spec:
             secretKeyRef:
               name: forgejo
               key: POSTGRES_PASSWORD
+        - name: FORGEJO__session__PROVIDER
+          value: redis
+        - name: FORGEJO__session__PROVIDER_CONFIG
+          value: "redis://localhost:6379/1"
+        - name: FORGEJO__cache__ADAPTER
+          value: redis
+        - name: FORGEJO__cache__HOST
+          value: "redis://localhost:6379/2"
+        - name: FORGEJO__cache__ITEM_TTL
+          value: "16h"
+        - name: FORGEJO__queue__TYPE
+          value: redis
+        - name: FORGEJO__queue__CONN_STR
+          value: "redis://localhost:6379/3"
         volumeMounts:
         - name: data
           mountPath: /data
@@ -66,3 +80,5 @@ spec:
         - name: data
           mountPath: /var/lib/postgresql
           subPath: database
+      - name: redis
+        image: valkey/valkey:9@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
