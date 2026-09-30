@@ -10,6 +10,11 @@ data:
     	auto_https off
     }
     
+    :1234 {
+    	# respond with success to /healthz on port 1234, to allow k8s to see when caddy is ready
+    	respond /healthz 200
+    }
+    
     http://jellyfin.psquid.net {
     	reverse_proxy paimon-windows.raven-ghost.ts.net:8096
     }

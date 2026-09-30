@@ -28,6 +28,17 @@ spec:
         image: caddy:2@sha256:0c994536bddb66445885237f1a5dcc1916bccea922661c76b4e9fc24061f9b52
         ports:
         - containerPort: 80
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 1234
+          failureThreshold: 12  # 12 * 5s = 1 minute startup leeway
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 1234
+          periodSeconds: 60
         volumeMounts:
         - name: data
           mountPath: /config
