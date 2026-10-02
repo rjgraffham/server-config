@@ -35,3 +35,15 @@ spec:
           subPath: library
         ports:
         - containerPort: 5000
+        startupProbe:
+          httpGet:
+            path: /api/Health
+            port: 5000
+          failureThreshold: 12  # 12 * 10s = 2 minutes startup leeway
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/Health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 30
