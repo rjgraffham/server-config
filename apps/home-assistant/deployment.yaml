@@ -31,3 +31,15 @@ spec:
           mountPath: /config
         ports:
         - containerPort: 8123
+        startupProbe:
+          httpGet:
+            path: /
+            port: 8123
+          failureThreshold: 12  # 12 * 10s = 2 minutes startup leeway
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8123
+          initialDelaySeconds: 10
+          periodSeconds: 30
