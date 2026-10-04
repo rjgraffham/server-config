@@ -32,3 +32,15 @@ spec:
           subPath: data
         ports:
         - containerPort: 8384
+        startupProbe:
+          httpGet:
+            path: /rest/noauth/health
+            port: 8384
+          failureThreshold: 30  # 30 * 10s = 5 minutes startup leeway
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /rest/noauth/health
+            port: 8384
+          initialDelaySeconds: 10
+          periodSeconds: 30
