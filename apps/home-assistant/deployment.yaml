@@ -13,6 +13,8 @@ spec:
       labels:
         app: homeassistant
     spec:
+      strategy:
+        type: Recreate
       volumes:
       - name: data
         persistentVolumeClaim:
