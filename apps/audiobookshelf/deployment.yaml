@@ -41,3 +41,15 @@ spec:
           subPath: podcasts
         ports:
         - containerPort: 80
+        startupProbe:
+          httpGet:
+            path: /healthcheck
+            port: 80
+          failureThreshold: 12  # 12 * 10s = 2 minutes startup leeway
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
