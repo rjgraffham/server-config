@@ -15,6 +15,10 @@ data:
     	respond /healthz 200
     }
     
+    http://jellyfin.psquid.net {
+    	reverse_proxy paimon-windows.raven-ghost.ts.net:8096
+    }
+    
     http://www.psquid.net {
     	redir https://{labels.1}.{labels.0}{uri}
     }

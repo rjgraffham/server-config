@@ -7,6 +7,7 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
+    - jellyfin.psquid.net
     - www.psquid.net
     - psquid.net
     - dl.psquid.net
