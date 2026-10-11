@@ -1,4 +1,5 @@
 resources:
+- cnpg-operator.yaml
 - flux-operator.yaml
 - tailscale-operator.yaml
 - backup
