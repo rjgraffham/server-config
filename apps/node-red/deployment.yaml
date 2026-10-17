@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-red
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-red
+  template:
+    metadata:
+      labels:
+        app: node-red
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: node-red-data-claim
+      securityContext:
+        runAsUser: 1880
+        runAsGroup: 1880
+      containers:
+      - name: app
+        image: nodered/node-red:5@sha256:b5adb6c9dd29ab80c852d82bc87daed84e729dcff9b00ca1bf958e6de470f2c1
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        ports:
+        - containerPort: 1880
