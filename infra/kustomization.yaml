@@ -4,3 +4,4 @@ resources:
 - tailscale-operator.yaml
 - backup
 - oidc-cluster-admin.yaml
+- ddclient.yaml

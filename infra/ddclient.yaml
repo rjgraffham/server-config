@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ddclient-config
+  namespace: default
+data:
+  ddclient.conf: |
+    # Update every 90s
+    daemon=90
+
+    # Do not fork (container will die when main process dies)
+    foreground=yes
+
+    # Get IP from web
+    use=web
+
+    # Update porkbun domain psquid.net (*.psquid.net is set up as a CNAME so it automatically becomes correct too)
+    protocol=porkbun
+    apikey_env=PORKBUN_PK
+    secretapikey_env=PORKBUN_SK
+    on-root-domain=yes
+    psquid.net
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ddclient
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ddclient
+  template:
+    metadata:
+      labels:
+        app: ddclient
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: ddclient-config
+      containers:
+      - name: app
+        image: alpine:latest@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+        command: [ "sh", "-c", "apk update; apk add ddclient; mkdir -p /etc/ddclient; cp /config/* /etc/ddclient/; chmod -R 400 /etc/ddclient; ddclient" ]
+        envFrom:
+        - secretRef:
+            name: porkbun-psquid-net
+        volumeMounts:
+        - name: config
+          mountPath: /config
