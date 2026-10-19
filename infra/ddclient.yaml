@@ -13,8 +13,8 @@ data:
     
     # Update porkbun domain psquid.net
     protocol=porkbun
-    apikey=pk1_c6322ad9e2f5ac33d4786fd92b5079e8a7119f1876837d4e7fdfd72cc7f5a91a
-    secretapikey=sk1_c3eee955dfd5f119d8a943ca32ba882fd79798ad827d8f361b07639b0d241b5a
+    apikey_env=PORKBUN_PK
+    secretapikey_env=PORKBUN_SK
     root-domain=psquid.net
     psquid.net,*.psquid.net
 ---
