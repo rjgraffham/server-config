@@ -8,9 +8,6 @@ data:
     # Update every 90s
     daemon=90
 
-    # Do not fork (container will die when main process dies)
-    foreground=yes
-
     # Get IP from web
     use=web
 
@@ -44,8 +41,7 @@ spec:
           name: ddclient-config
       containers:
       - name: app
-        image: alpine:latest@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
-        command: [ "sh", "-c", "apk update; apk add ddclient; mkdir -p /etc/ddclient; cp /config/* /etc/ddclient/; chmod -R 400 /etc/ddclient; ddclient" ]
+        image: ghcr.io/rjgraffham/ddclient-k8s:latest@sha256:f71aa92e2b6cb98ac5f3e59f220e9ed7423af41660e6ac97b8d918446513c5ee
         envFrom:
         - secretRef:
             name: porkbun-psquid-net
