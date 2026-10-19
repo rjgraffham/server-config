@@ -7,16 +7,16 @@ data:
   ddclient.conf: |
     # Update every 90s
     daemon=90
-
+    
     # Get IP from web
     use=web
-
-    # Update porkbun domain psquid.net (*.psquid.net is set up as a CNAME so it automatically becomes correct too)
+    
+    # Update porkbun domain psquid.net
     protocol=porkbun
-    apikey_env=PORKBUN_PK
-    secretapikey_env=PORKBUN_SK
-    on-root-domain=yes
-    psquid.net
+    apikey=pk1_c6322ad9e2f5ac33d4786fd92b5079e8a7119f1876837d4e7fdfd72cc7f5a91a
+    secretapikey=sk1_c3eee955dfd5f119d8a943ca32ba882fd79798ad827d8f361b07639b0d241b5a
+    root-domain=psquid.net
+    psquid.net,*.psquid.net
 ---
 apiVersion: apps/v1
 kind: Deployment
