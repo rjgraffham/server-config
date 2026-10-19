@@ -5,8 +5,8 @@ metadata:
   namespace: default
 data:
   ddclient.conf: |
-    # Update every 90s
-    daemon=90
+    # Update every 5 minutes
+    daemon=300
     
     # Get IP from web
     use=web
