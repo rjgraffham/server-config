@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tcp-udp-broadcast-relay
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: tcp-udp-broadcast-relay
+  template:
+    metadata:
+      labels:
+        app: tcp-udp-broadcast-relay
+    spec:
+      hostNetwork: true  # required for UDP packet broadcast
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: app
+        image: ghcr.io/rjgraffham/tcp-udp-broadcast-relay:latest@sha256:3d62df15fdda2246aca3ca10393a3f3951895124c7804b37083462cbd2ea8834
+        env:
+        - name: RELAY_LISTEN_PORT
+          value: '2009'
+

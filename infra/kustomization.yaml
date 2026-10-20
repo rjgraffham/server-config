@@ -5,3 +5,4 @@ resources:
 - backup
 - oidc-cluster-admin.yaml
 - ddclient.yaml
+- tcp-udp-broadcast-relay.yaml
