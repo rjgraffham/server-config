@@ -1,7 +1,6 @@
 resources:
 - linkding
 - audiobookshelf
-- home-assistant
 - node-red
 - immich
 - kavita
