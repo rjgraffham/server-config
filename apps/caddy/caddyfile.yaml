@@ -39,6 +39,34 @@ data:
     	root /srv/sites/dl-public.psquid.net/html
     	file_server browse
     }
+
+    http://abs.psquid.net, http://immich.psquid.net, http://kavita.psquid.net, http://linkding.psquid.net, http://reader.psquid.net, http://music.psquid.net, http://yomi.psquid.net, http://git.psquid.net, http://jellyfin.psquid.net {
+        # all sites expected to be served by ingresses - i.e., if it got here, that ingress is down
+    	handle /sitespecial.css {
+    		root * /srv/sites/html
+    		file_server
+    	}
+    
+    	handle {
+    		root * /srv/sites/html
+    		rewrite * maintenance.html
+    		file_server
+    	}
+    }
+
+    http://ha.psquid.net {
+        # formerly present but now retired sites
+    	handle /sitespecial.css {
+    		root * /srv/sites/html
+    		file_server
+    	}
+    
+    	handle {
+    		root * /srv/sites/html
+    		rewrite * retired.html
+    		file_server
+    	}
+    }
     
     :80 {
     	# catchall for any request not matched by a vhost above
