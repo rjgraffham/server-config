@@ -13,6 +13,7 @@ data:
     
     # Update domain psquid.net (DNS managed by cloudflare)
     protocol=cloudflare
+    zone=psquid.net
     login_env=CLOUDFLARE_LOGIN
     password_env=CLOUDFLARE_TOKEN
     psquid.net,*.psquid.net
