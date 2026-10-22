@@ -11,11 +11,10 @@ data:
     # Get IP from web
     use=web
     
-    # Update porkbun domain psquid.net
-    protocol=porkbun
-    apikey_env=PORKBUN_PK
-    secretapikey_env=PORKBUN_SK
-    root-domain=psquid.net
+    # Update domain psquid.net (DNS managed by cloudflare)
+    protocol=cloudflare
+    login_env=CLOUDFLARE_LOGIN
+    password_env=CLOUDFLARE_TOKEN
     psquid.net,*.psquid.net
 ---
 apiVersion: apps/v1
@@ -44,7 +43,7 @@ spec:
         image: ghcr.io/rjgraffham/ddclient-k8s:latest@sha256:f71aa92e2b6cb98ac5f3e59f220e9ed7423af41660e6ac97b8d918446513c5ee
         envFrom:
         - secretRef:
-            name: porkbun-psquid-net
+            name: cloudflare-psquid-net
         volumeMounts:
         - name: config
           mountPath: /config
