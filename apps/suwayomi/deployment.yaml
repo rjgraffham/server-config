@@ -32,7 +32,7 @@ spec:
         ports:
         - containerPort: 4567
       - name: ereadifier
-        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:d620fb58551cdd7c537d52c362c4dbb4cd2550f3a4a0039e4f9d367c2b18d8b3
+        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:28a029a53eccebf0defd9d65041eefa2f6f761206a8d439144667c759dddbc16
         env:
         - name: EREADIFIER_DIMENSIONS
           value: clara
