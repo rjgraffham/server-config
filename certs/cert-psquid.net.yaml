@@ -9,5 +9,5 @@ spec:
   - psquid.net
   - "*.psquid.net"
   issuerRef:
-    name: digitalocean-dns
+    name: cloudflare-dns
     kind: ClusterIssuer

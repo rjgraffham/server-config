@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: digitalocean-dns
+  name: cloudflare-dns
 spec:
   acme:
     email: letsencrypt@psquid.net
@@ -11,7 +11,8 @@ spec:
       key: privateKey
     solvers:
     - dns01:
-        digitalocean:
-          tokenSecretRef:
-            name: digitalocean-dns
-            key: access-token
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-dns
+            key: api-token
+
