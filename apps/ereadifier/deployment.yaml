@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ereadifier
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ereadifier
+  template:
+    metadata:
+      labels:
+        app: ereadifier
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+      - name: ereadifier
+        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:28a029a53eccebf0defd9d65041eefa2f6f761206a8d439144667c759dddbc16
+        env:
+        - name: EREADIFIER_DIMENSIONS
+          value: clara
+        - name: EREADIFIER_ENCODE
+          value: smallest
+        - name: EREADIFIER_LOSSY_QUALITY
+          value: "85"
+        - name: EREADIFIER_DOUBLE_PAGE
+          value: wider
+        - name: EREADIFIER_LISTEN
+          value: 127.0.0.1:5656
+        ports:
+        - containerPort: 5656

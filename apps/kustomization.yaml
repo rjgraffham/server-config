@@ -7,6 +7,7 @@ resources:
 - navidrome
 - syncthing
 - suwayomi
+- ereadifier
 - miniflux
 - caddy
 - forgejo
