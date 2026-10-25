@@ -29,6 +29,6 @@ spec:
         - name: EREADIFIER_DOUBLE_PAGE
           value: wider
         - name: EREADIFIER_LISTEN
-          value: 127.0.0.1:5656
+          value: 0.0.0.0:5656
         ports:
         - containerPort: 5656
