@@ -10,6 +10,11 @@ spec:
     name: flux-system
     namespace: flux-system
     ready: true
+  - apiVersion: kustomize.toolkit.fluxcd.io/v1
+    kind: Kustomization
+    name: infra
+    namespace: flux-system
+    ready: true
   resources:
   - apiVersion: kustomize.toolkit.fluxcd.io/v1
     kind: Kustomization
