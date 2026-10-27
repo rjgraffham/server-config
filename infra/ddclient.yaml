@@ -10,6 +10,7 @@ data:
     
     # Get IP from web
     use=web
+    web=ipify-ipv4
     
     # Update domain psquid.net (DNS managed by cloudflare)
     protocol=cloudflare
