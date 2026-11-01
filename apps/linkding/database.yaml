@@ -4,7 +4,7 @@ metadata:
   name: linkding-postgres
 spec:
   hostPath:
-    path: /var/lib/cluster-data/linkding-postgres
+    path: /var/lib/cluster-data/cnpg/linkding
     type: DirectoryOrCreate
   accessModes:
   - ReadWriteOnce
@@ -14,7 +14,7 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: linkding
+  name: linkding-postgres
   namespace: default
 spec:
   instances: 1
