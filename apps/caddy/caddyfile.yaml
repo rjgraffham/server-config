@@ -40,7 +40,7 @@ data:
     	file_server browse
     }
 
-    http://abs.psquid.net, http://immich.psquid.net, http://kavita.psquid.net, http://linkding.psquid.net, http://reader.psquid.net, http://music.psquid.net, http://yomi.psquid.net, http://git.psquid.net, http://jellyfin.psquid.net {
+    http://abs.psquid.net, http://kavita.psquid.net, http://linkding.psquid.net, http://reader.psquid.net, http://music.psquid.net, http://yomi.psquid.net, http://git.psquid.net, http://jellyfin.psquid.net {
         # all sites expected to be served by ingresses - i.e., if it got here, that ingress is down
     	handle /sitespecial.css {
     		root * /srv/sites/html
@@ -54,7 +54,7 @@ data:
     	}
     }
 
-    http://ha.psquid.net {
+    http://ha.psquid.net, http://immich.psquid.net {
         # formerly present but now retired sites
     	handle /sitespecial.css {
     		root * /srv/sites/html
