@@ -4,3 +4,4 @@ resources:
 - service.yaml
 - ingress.yaml
 - environment.yaml
+- database.yaml

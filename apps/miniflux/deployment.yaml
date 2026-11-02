@@ -13,10 +13,6 @@ spec:
       labels:
         app: miniflux
     spec:
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: miniflux-data-claim
       securityContext:
         runAsUser: 8080
         runAsGroup: 8080
@@ -46,18 +42,3 @@ spec:
             port: 8080
           initialDelaySeconds: 10
           periodSeconds: 30
-      - name: db
-        image: postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
-        env:
-        - name: POSTGRES_DB
-          value: miniflux
-        - name: POSTGRES_USER
-          value: miniflux
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: miniflux
-              key: POSTGRES_PASSWORD
-        volumeMounts:
-        - name: data
-          mountPath: /var/lib/postgresql
