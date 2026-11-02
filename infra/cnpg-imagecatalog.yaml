@@ -1,0 +1,36 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: cnpg-imagecatalogs
+  namespace: flux-system
+spec:
+  dependsOn:
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: clusterimagecatalogs.postgresql.cnpg.io
+    ready: true
+  resources:
+  - apiVersion: source.toolkit.fluxcd.io/v1
+    kind: GitRepository
+    metadata:
+      name: cnpg-artifacts
+      namespace: flux-system
+    spec:
+      interval: 10m
+      url: https://github.com/cloudnative-pg/artifacts
+      ref:
+        branch: main
+  - apiVersion: kustomize.toolkit.fluxcd.io/v1
+    kind: Kustomization
+    metadata:
+      name: cnpg-imagecatalogs
+      namespace: flux-system
+    spec:
+      interval: 10m
+      prune: true
+      sourceRef:
+        apiVersion: source.toolkit.fluxcd.io/v1
+        kind: GitRepository
+        name: cnpg-artifacts
+        namespace: flux-system
+      path: ./image-catalogs
