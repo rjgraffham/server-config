@@ -24,6 +24,11 @@ spec:
       owner: linkding
       secret:
         name: linkding-postgres
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-standard-trixie
+    major: 18
   storage:
     size: 5Gi
     pvcTemplate:
