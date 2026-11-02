@@ -22,7 +22,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: app
-        image: ghcr.io/suwayomi/suwayomi-server:preview@sha256:ca891c0a6915666d6a79f16b0119c52a63507d840e14dca0e8dbcc163f60d8b3
+        image: ghcr.io/suwayomi/suwayomi-server:preview@sha256:b45e91fb40a8c31b1204ed8d98e64669ed64ed2374920f272b9ff68bd066edf7
         env:
         - name: TZ
           value: "Etc/UTC"
