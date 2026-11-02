@@ -30,16 +30,19 @@ spec:
         - name: FORGEJO__database__DB_TYPE
           value: postgres
         - name: FORGEJO__database__HOST
-          value: "localhost:5432"
+          value: "forgejo-postgres-rw:5432"
         - name: FORGEJO__database__NAME
           value: forgejo
         - name: FORGEJO__database__USER
-          value: forgejo
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-postgres
+              key: username
         - name: FORGEJO__database__PASSWD
           valueFrom:
             secretKeyRef:
-              name: forgejo
-              key: POSTGRES_PASSWORD
+              name: forgejo-postgres
+              key: password
         - name: FORGEJO__session__PROVIDER
           value: redis
         - name: FORGEJO__session__PROVIDER_CONFIG
@@ -73,24 +76,5 @@ spec:
             port: 3000
           initialDelaySeconds: 10
           periodSeconds: 30
-      - name: db
-        image: postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-        env:
-        - name: POSTGRES_DB
-          value: forgejo
-        - name: POSTGRES_USER
-          value: forgejo
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: forgejo
-              key: POSTGRES_PASSWORD
-        volumeMounts:
-        - name: data
-          mountPath: /var/lib/postgresql
-          subPath: database
       - name: redis
         image: valkey/valkey:9@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7

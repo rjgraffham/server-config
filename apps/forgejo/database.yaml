@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: forgejo-postgres
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/cnpg/forgejo
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: forgejo-postgres
+  namespace: default
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: forgejo
+      owner: forgejo
+      secret:
+        name: forgejo-postgres
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-standard-trixie
+    major: 18
+  storage:
+    size: 5Gi
+    pvcTemplate:
+      storageClassName: ""
+      volumeName: forgejo-postgres
+      accessModes:
+      - ReadWriteOnce
