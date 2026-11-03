@@ -23,8 +23,8 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: miniflux
-              key: DATABASE_URL
+              name: miniflux-postgres
+              key: connection_url
         envFrom:
         - configMapRef:
             name: miniflux
