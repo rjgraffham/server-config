@@ -42,7 +42,7 @@ spec:
           name: ddclient-config
       containers:
       - name: app
-        image: ghcr.io/rjgraffham/ddclient-k8s:latest@sha256:b92d61c2043d060f991d6bf948a2054ab9e86155ab5128d536bea59c1fa15ea3
+        image: ghcr.io/rjgraffham/ddclient-k8s:latest@sha256:a50f16d682093aca453b3f34b07213b488e9e5092679eba6396980f5abc224cb
         envFrom:
         - secretRef:
             name: cloudflare-psquid-net
