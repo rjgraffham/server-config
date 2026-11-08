@@ -2,6 +2,7 @@ resources:
 - cnpg-operator.yaml
 - cnpg-imagecatalog.yaml
 - flux-operator.yaml
+- garage.yaml
 - tailscale-operator.yaml
 - backup
 - oidc-cluster-admin.yaml
