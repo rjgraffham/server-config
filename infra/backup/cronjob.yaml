@@ -20,7 +20,7 @@ spec:
               defaultMode: 0600
           containers:
           - name: runner
-            image: ghcr.io/rjgraffham/backup-runner:latest@sha256:83c73cbc3e32ddfb804b087f2d35ced4744bfc513de5465e219bec68e33eba9e
+            image: ghcr.io/rjgraffham/backup-runner:latest@sha256:d94c0d6a2c35597a2dc13752857607d699b328edf0a219cdb08569d0c5838fd4
             volumeMounts:
             - name: data
               mountPath: /data
