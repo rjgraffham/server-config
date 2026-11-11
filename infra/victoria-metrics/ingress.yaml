@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vm-ingress
+  namespace: vm
+spec:
+  ingressClassName: tailscale
+  tls:
+  - hosts:
+    - vm
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vmsingle-vm-instance
+            port:
+              number: 8429
+

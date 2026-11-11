@@ -1,0 +1,46 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: vm-instance
+  namespace: vm
+spec:
+  dependsOn:
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: vmsingles.operator.victoriametrics.com
+  resources:
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: vm-data
+    spec:
+      hostPath:
+        path: /var/lib/cluster-data/victoria-metrics
+        type: DirectoryOrCreate
+      accessModes:
+      - ReadWriteOnce
+      capacity:
+        storage: 15Gi
+  - apiVersion: operator.victoriametrics.com/v1beta1
+    kind: VMSingle
+    metadata:
+      name: vm-instance
+      namespace: vm
+    spec:
+      retentionPeriod: "14d"
+      removePvcAfterDelete: true
+      storage:
+        storageClassName: ""
+        volumeName: vm-data
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 15Gi
+      resources:
+        requests:
+          memory: 500Mi
+          cpu: 500m
+        limits:
+          memory: 4Gi
+          cpu: 2
