@@ -16,23 +16,31 @@ data:
         {
           "panels": [
             {
-              "title": "Per-node CPU usage (cores per second)",
+              "title": "Per-node CPU usage",
+              "unit": "cores",
               "width": 6,
+              "alias": ["{{node}}"],
               "expr": ["sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (node)"]
             },
             {
-              "title": "Per-node memory usage (MiB)",
+              "title": "Per-node memory usage",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{node}}"],
               "expr": ["sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (node)"]
             },
             {
-              "title": "Per-node disk read (MiB/s)",
+              "title": "Per-node disk read",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{node}}"],
               "expr": ["sum(rate(container_fs_reads_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (node)"]
             },
             {
-              "title": "Per-node disk write (MiB/s)",
+              "title": "Per-node disk write",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{node}}"],
               "expr": ["sum(rate(container_fs_writes_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (node)"]
             }
           ]
@@ -46,23 +54,31 @@ data:
         {
           "panels": [
             {
-              "title": "Per-pod CPU usage (cores per second, top 20)",
+              "title": "Per-pod CPU usage (top 20)",
+              "unit": "cores",
               "width": 6,
+              "alias": ["{{namespace}}/{{pod}}"],
               "expr": ["topk_avg(20, sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (namespace,pod))"]
             },
             {
-              "title": "Per-pod memory usage (MiB, top 20)",
+              "title": "Per-pod memory usage (top 20)",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{namespace}}/{{pod}}"],
               "expr": ["topk_avg(20, sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (namespace,pod))"]
             },
             {
-              "title": "Per-pod disk read (MiB/s, top 20)",
+              "title": "Per-pod disk read (top 20)",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{namespace}}/{{pod}}"],
               "expr": ["topk_avg(20, sum(rate(container_fs_reads_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace, pod))"]
             },
             {
-              "title": "Per-pod disk write (MiB/s, top 20)",
+              "title": "Per-pod disk write (top 20)",
+              "unit": "MiB",
               "width": 6,
+              "alias": ["{{namespace}}/{{pod}}"],
               "expr": ["topk_avg(20, sum(rate(container_fs_writes_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace, pod))"]
             }
           ]
