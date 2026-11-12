@@ -1,0 +1,23 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: home-metrics
+  namespace: default
+spec:
+  dependsOn:
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: vmstaticscrapes.operator.victoriametrics.com
+  resources:
+  - apiVersion: operator.victoriametrics.com/v1beta1
+    kind: VMStaticScrape
+    metadata:
+      name: home-metrics
+      namespace: default
+    spec:
+      jobName: "homemetrics"
+      targetEndpoints:
+      - targets:
+        - "node-red-web:80"
+        path: /home-metrics
+
