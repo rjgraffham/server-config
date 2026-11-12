@@ -27,6 +27,10 @@ spec:
       name: vm-instance
       namespace: vm
     spec:
+      configMaps:
+      - dashboards
+      extraArgs:
+        vmui.customDashboardsPath: /etc/vm/configs/dashboards
       retentionPeriod: "14d"
       removePvcAfterDelete: true
       storage:

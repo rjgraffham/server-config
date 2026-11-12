@@ -2,5 +2,6 @@ resources:
 - helm-repo.yaml
 - operator.yaml
 - instance.yaml
+- dashboards.yaml
 - container-metrics.yaml
 - ingress.yaml
