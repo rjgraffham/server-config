@@ -8,6 +8,9 @@ spec:
   - apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     name: vmsingles.operator.victoriametrics.com
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: vmagents.operator.victoriametrics.com
   resources:
   - apiVersion: v1
     kind: PersistentVolume
@@ -48,3 +51,13 @@ spec:
         limits:
           memory: 4Gi
           cpu: 2
+  - apiVersion: operator.victoriametrics.com/v1beta1
+    kind: VMAgent
+    metadata:
+      name: cluster-metrics
+      namespace: vm
+    spec:
+      replicaCount: 1
+      selectAllByDefault: true
+      remoteWrite:
+        - url: http://vmsingle-vm-instance.vm.svc.cluster.local:8428/api/v1/write
