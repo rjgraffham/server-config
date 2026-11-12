@@ -31,7 +31,7 @@ data:
               "expr": ["sum(rate(container_fs_reads_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (node)"]
             },
             {
-              "title": "Per-pod disk write (MiB/s)",
+              "title": "Per-node disk write (MiB/s)",
               "width": 6,
               "expr": ["sum(rate(container_fs_writes_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (node)"]
             }
