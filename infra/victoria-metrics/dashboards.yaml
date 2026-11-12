@@ -23,7 +23,7 @@ data:
             {
               "title": "Per-node memory usage (MiB)",
               "width": 6,
-              "expr": ["sum(container_memory_usage_bytes{container!=\"\"}) by (node)"]
+              "expr": ["sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (node)"]
             },
             {
               "title": "Per-node disk read (MiB/s)",
@@ -53,7 +53,7 @@ data:
             {
               "title": "Per-pod memory usage (MiB, top 20)",
               "width": 6,
-              "expr": ["topk_avg(20, sum(container_memory_usage_bytes{container!=\"\"}) by (namespace,pod))"]
+              "expr": ["topk_avg(20, sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (namespace,pod))"]
             },
             {
               "title": "Per-pod disk read (MiB/s, top 20)",
