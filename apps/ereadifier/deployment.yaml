@@ -18,7 +18,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: ereadifier
-        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:e18466662ab3ae94a0ebdcdba0400bfef0f2526e30add9f9d2682f719d745b17
+        image: ghcr.io/rjgraffham/ereadifier:latest@sha256:b52d1c9ad03aa24465686b078a6fd1f842194eaf7e7d0b9fd2075f3149c0038c
         env:
         - name: EREADIFIER_DIMENSIONS
           value: clara
