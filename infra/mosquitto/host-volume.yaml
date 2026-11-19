@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mosquitto-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/mosquitto
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mosquitto-data-claim
+  namespace: mosquitto
+spec:
+  storageClassName: ""
+  volumeName: mosquitto-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

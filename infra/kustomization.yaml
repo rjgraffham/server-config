@@ -4,6 +4,7 @@ resources:
 - flux-operator.yaml
 - garage.yaml
 - tailscale-operator.yaml
+- mosquitto
 - victoria-metrics
 - backup
 - oidc-cluster-admin.yaml

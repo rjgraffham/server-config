@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt
+  namespace: mosquitto
+  annotations:
+    tailscale.com/hostname: mqtt
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app: mosquitto
+  ports:
+  - port: 1883
+    targetPort: 1883

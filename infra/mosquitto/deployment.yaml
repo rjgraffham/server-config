@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  namespace: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: config
+      - name: data
+        persistentVolumeClaim:
+          claimName: mosquitto-data-claim
+      - name: logs
+        emptyDir: {}
+      - name: init-secrets
+        secret:
+          secretName: secrets
+      - name: runtime-secrets
+        emptyDir: {}
+      securityContext:
+        runAsUser: 1883
+        runAsGroup: 1883
+      initContainers:
+      - name: secret-fix  # mosquitto fails to read password through Secret volume symlink
+        image: docker.io/library/alpine:latest@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf
+        command: [ "sh", "-c", "cat /secret/passwd > /runtime/passwd; chown 1883:1883 /runtime/passwd; chmod 700 /runtime/passwd" ]
+        volumeMounts:
+        - name: init-secrets
+          mountPath: /secret
+        - name: runtime-secrets
+          mountPath: /runtime
+      containers:
+      - name: app
+        image: docker.io/library/eclipse-mosquitto:2@sha256:fa12172a051310efe5bcb7a6a11b77bd5faacb82cbacd7742aa758bf024fd8e4
+        volumeMounts:
+        - name: config
+          mountPath: /mosquitto/config
+        - name: data
+          mountPath: /mosquitto/data
+        - name: logs
+          mountPath: /mosquitto/log
+        - name: runtime-secrets
+          mountPath: /mosquitto/secret
+        ports:
+        - containerPort: 1883
