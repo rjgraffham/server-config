@@ -3,11 +3,8 @@ kind: Service
 metadata:
   name: mqtt
   namespace: mosquitto
-  annotations:
-    tailscale.com/hostname: mqtt
 spec:
-  type: LoadBalancer
-  loadBalancerClass: tailscale
+  type: ClusterIP
   selector:
     app: mosquitto
   ports:

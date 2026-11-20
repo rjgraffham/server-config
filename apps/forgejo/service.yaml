@@ -17,10 +17,9 @@ metadata:
   name: forgejo-ssh
   namespace: default
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: forgejo
   ports:
-  - port: 30022
-    targetPort: 30022
-    nodePort: 30022
+  - port: 2222
+    targetPort: 2222

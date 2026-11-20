@@ -62,7 +62,7 @@ spec:
           mountPath: /data
           subPath: data
         ports:
-        - containerPort: 30022
+        - containerPort: 2222
         - containerPort: 3000
         startupProbe:
           httpGet:
