@@ -1,4 +1,5 @@
 resources:
+- namespace.yaml
 - helm-repo.yaml
 - operator.yaml
 - instance.yaml

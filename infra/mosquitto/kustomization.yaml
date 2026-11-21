@@ -1,4 +1,5 @@
 resources:
+- namespace.yaml
 - config.yaml
 - deployment.yaml
 - host-volume.yaml
