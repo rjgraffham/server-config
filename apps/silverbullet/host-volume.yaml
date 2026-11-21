@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: silverbullet-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/silverbullet
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: silverbullet-data-claim
+  namespace: silverbullet
+spec:
+  storageClassName: ""
+  volumeName: silverbullet-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

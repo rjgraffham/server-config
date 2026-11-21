@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: silverbullet
+  namespace: silverbullet
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: silverbullet
+  template:
+    metadata:
+      labels:
+        app: silverbullet
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: silverbullet-data-claim
+      securityContext:
+        runAsUser: 3678
+        runAsGroup: 3678
+      containers:
+      - name: app
+        image: ghcr.io/silverbulletmd/silverbullet:latest@sha256:370a3bf2daa37b7dbba62183085c57d5d43862189ea127e0765646d230561d9d
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        ports:
+        - containerPort: 3000
