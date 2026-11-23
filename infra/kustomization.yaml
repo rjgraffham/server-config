@@ -8,5 +8,5 @@ resources:
 - victoria-metrics
 - backup
 - oidc-cluster-admin.yaml
-- ddclient.yaml
+- ddclient
 - tcp-udp-broadcast-relay.yaml

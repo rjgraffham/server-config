@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ddclient-config
+  namespace: ddclient
+data:
+  ddclient.conf: |
+    # Update every 5 minutes
+    daemon=300
+    
+    # Get IP from web
+    use=web
+    web=ipify-ipv4
+    
+    # Update domain psquid.net (DNS managed by cloudflare)
+    protocol=cloudflare
+    zone=psquid.net
+    login=token
+    password_env=CLOUDFLARE_TOKEN
+    psquid.net,*.psquid.net
