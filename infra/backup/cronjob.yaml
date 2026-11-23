@@ -2,10 +2,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: backup
-  namespace: default
+  namespace: backup
 spec:
   schedule: "0 */6 * * *"
-  replicas: 1
   jobTemplate:
     spec:
       template:
