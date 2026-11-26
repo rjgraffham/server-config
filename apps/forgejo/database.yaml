@@ -14,8 +14,8 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: forgejo-postgres
-  namespace: default
+  name: postgres
+  namespace: forgejo
 spec:
   instances: 1
   enablePDB: false  # if cluster grows to >1 node, ensure this becomes true to do proper switchover on drain

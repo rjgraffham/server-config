@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: forgejo
-  namespace: default
+  namespace: forgejo
 spec:
   replicas: 1
   selector:
@@ -30,7 +30,7 @@ spec:
         - name: FORGEJO__database__DB_TYPE
           value: postgres
         - name: FORGEJO__database__HOST
-          value: "forgejo-postgres-rw:5432"
+          value: "postgres-rw.forgejo.svc.cluster.local:5432"
         - name: FORGEJO__database__NAME
           value: forgejo
         - name: FORGEJO__database__USER
@@ -46,17 +46,17 @@ spec:
         - name: FORGEJO__session__PROVIDER
           value: redis
         - name: FORGEJO__session__PROVIDER_CONFIG
-          value: "redis://localhost:6379/1"
+          value: "redis://redis.forgejo.svc.cluster.local:6379/1"
         - name: FORGEJO__cache__ADAPTER
           value: redis
         - name: FORGEJO__cache__HOST
-          value: "redis://localhost:6379/2"
+          value: "redis://redis.forgejo.svc.cluster.local:6379/2"
         - name: FORGEJO__cache__ITEM_TTL
           value: "16h"
         - name: FORGEJO__queue__TYPE
           value: redis
         - name: FORGEJO__queue__CONN_STR
-          value: "redis://localhost:6379/3"
+          value: "redis://redis.forgejo.svc.cluster.local:6379/3"
         volumeMounts:
         - name: data
           mountPath: /data
@@ -76,5 +76,22 @@ spec:
             port: 3000
           initialDelaySeconds: 10
           periodSeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-redis
+  namespace: forgejo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo-redis
+  template:
+    metadata:
+      labels:
+        app: forgejo-redis
+    spec:
+      containers:
       - name: redis
         image: valkey/valkey:9@sha256:1c2b25b09f354c66fe994733acdf12fcfd4bdf6f3bd92b88a93a70378d884056
