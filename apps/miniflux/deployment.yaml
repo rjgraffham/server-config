@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: miniflux
-  namespace: default
+  namespace: miniflux
 spec:
   replicas: 1
   selector:

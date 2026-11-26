@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: miniflux
-  namespace: default
+  namespace: miniflux
 spec:
   ingressClassName: traefik
   tls:
@@ -17,6 +17,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: miniflux-web
+            name: web
             port:
               number: 80
