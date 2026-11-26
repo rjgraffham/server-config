@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ereadifier
-  namespace: default
+  namespace: suwayomi
 spec:
   replicas: 1
   selector:
