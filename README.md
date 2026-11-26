@@ -36,6 +36,9 @@ The configuration is intended to be as hands-off as possible, with Flux ensuring
 
 Once these steps are run, Flux will work through the components of the cluster definition, reconciling them with the state of the system, and when this is complete, the system will be fully deployed.
 
+> [!CAUTION]
+> While most components of the cluster can simply be restored on top of an existing set of files, CloudNativePG clusters prefer to move any existing data aside if they're initialized with a non-empty data volume. For these, it will be necessary to hibernate the clusters, move the old data back into place, and then un-hibernate the clusters.
+
 
 
 <!-- Footnotes -->
