@@ -7,7 +7,7 @@ data:
   index.js: |-
     window.__VMUI_PREDEFINED_DASHBOARDS__ = [
       "node-resources.json",
-      "pod-resources.json",
+      "namespace-resources.json",
     ];
   node-resources.json: |-
     {
@@ -47,39 +47,39 @@ data:
         }
       ]
     }
-  pod-resources.json: |-
+  namespace-resources.json: |-
     {
-      "title": "per-pod resource usage",
+      "title": "per-namespace resource usage",
       "rows": [
         {
           "panels": [
             {
-              "title": "Per-pod CPU usage (top 20)",
+              "title": "Per-namespace CPU usage (top 20)",
               "unit": "cores",
               "width": 6,
-              "alias": ["{{namespace}}/{{pod}}"],
-              "expr": ["topk_avg(20, sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (namespace,pod))"]
+              "alias": ["{{namespace}}"],
+              "expr": ["topk_avg(20, sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (namespace))"]
             },
             {
-              "title": "Per-pod memory usage (top 20)",
+              "title": "Per-namespace memory usage (top 20)",
               "unit": "MiB",
               "width": 6,
-              "alias": ["{{namespace}}/{{pod}}"],
-              "expr": ["topk_avg(20, sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (namespace,pod))"]
+              "alias": ["{{namespace}}"],
+              "expr": ["topk_avg(20, sum(container_memory_usage_bytes{container!=\"\"} / (1024 * 1024)) by (namespace))"]
             },
             {
-              "title": "Per-pod disk read (top 20)",
+              "title": "Per-namespace disk read (top 20)",
               "unit": "MiB",
               "width": 6,
-              "alias": ["{{namespace}}/{{pod}}"],
-              "expr": ["topk_avg(20, sum(rate(container_fs_reads_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace, pod))"]
+              "alias": ["{{namespace}}"],
+              "expr": ["topk_avg(20, sum(rate(container_fs_reads_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace))"]
             },
             {
-              "title": "Per-pod disk write (top 20)",
+              "title": "Per-namespace disk write (top 20)",
               "unit": "MiB",
               "width": 6,
-              "alias": ["{{namespace}}/{{pod}}"],
-              "expr": ["topk_avg(20, sum(rate(container_fs_writes_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace, pod))"]
+              "alias": ["{{namespace}}"],
+              "expr": ["topk_avg(20, sum(rate(container_fs_writes_bytes_total{container!=\"\"}[5m] / (1024 * 1024))) by (namespace))"]
             }
           ]
         }
