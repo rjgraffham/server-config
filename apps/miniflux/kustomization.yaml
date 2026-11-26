@@ -2,6 +2,7 @@ resources:
 - namespace.yaml
 - deployment.yaml
 - service.yaml
+- cert.yaml
 - ingress.yaml
 - environment.yaml
 - database.yaml

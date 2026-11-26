@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - abs.psquid.net
-    secretName: psquid-net-tls
+    secretName: audiobookshelf-tls
   rules:
   - host: abs.psquid.net
     http:

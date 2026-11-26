@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: miniflux
+spec:
+  secretName: miniflux-tls
+  dnsNames:
+  - reader.psquid.net
+  issuerRef:
+    name: cloudflare-dns
+    kind: ClusterIssuer

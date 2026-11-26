@@ -3,5 +3,6 @@ resources:
 - host-volume.yaml
 - deployment.yaml
 - service.yaml
+- cert.yaml
 - ingress.yaml
 - database.yaml

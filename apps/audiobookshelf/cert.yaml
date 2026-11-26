@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: default
+spec:
+  secretName: audiobookshelf-tls
+  dnsNames:
+  - abs.psquid.net
+  issuerRef:
+    name: cloudflare-dns
+    kind: ClusterIssuer

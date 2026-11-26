@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: forgejo
+spec:
+  secretName: forgejo-tls
+  dnsNames:
+  - git.psquid.net
+  issuerRef:
+    name: cloudflare-dns
+    kind: ClusterIssuer

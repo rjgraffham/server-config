@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - notes.psquid.net
-    secretName: psquid-net-tls
+    secretName: silverbullet-tls
   rules:
   - host: notes.psquid.net
     http:

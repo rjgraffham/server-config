@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: silverbullet
+spec:
+  secretName: silverbullet-tls
+  dnsNames:
+  - notes.psquid.net
+  issuerRef:
+    name: cloudflare-dns
+    kind: ClusterIssuer
