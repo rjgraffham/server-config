@@ -5,3 +5,4 @@ resources:
 - service.yaml
 - ingress.yaml
 - metrics.yaml
+- tcp-udp-broadcast-relay.yaml
