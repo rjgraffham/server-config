@@ -1,5 +1,7 @@
 resources:
+- namespace.yaml
 - host-volume.yaml
 - deployment.yaml
 - service.yaml
+- cert.yaml
 - ingress.yaml

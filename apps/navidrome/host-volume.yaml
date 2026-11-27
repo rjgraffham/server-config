@@ -15,7 +15,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: navidrome-data-claim
-  namespace: default
+  namespace: navidrome
 spec:
   storageClassName: ""
   volumeName: navidrome-data
