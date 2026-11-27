@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: caddy
-  namespace: default
+  namespace: caddy
 spec:
   replicas: 1
   selector:
