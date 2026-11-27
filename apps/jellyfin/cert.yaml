@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: jellyfin
+spec:
+  secretName: jellyfin-tls
+  dnsNames:
+  - jellyfin.psquid.net
+  issuerRef:
+    name: cloudflare-dns
+    kind: ClusterIssuer
