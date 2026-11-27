@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kavita-web
-  namespace: default
+  name: web
+  namespace: kavita
 spec:
   type: ClusterIP
   selector:
