@@ -1,6 +1,5 @@
 resources:
 - cloudflare-issuer.yaml
-- cert-psquid.net.yaml
 - cnpg-operator.yaml
 - cnpg-imagecatalog.yaml
 - flux-operator.yaml
