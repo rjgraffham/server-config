@@ -19,7 +19,7 @@ spec:
           claimName: navidrome-data-claim
       - name: syncthing
         persistentVolumeClaim:
-          claimName: syncthing-data-claim
+          claimName: navidrome-syncthing-data-claim
       securityContext:
         runAsUser: 3354
         runAsGroup: 3354

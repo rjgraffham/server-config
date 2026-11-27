@@ -1,6 +1,7 @@
 resources:
 - namespace.yaml
 - host-volume.yaml
+- host-volume-syncthing.yaml
 - deployment.yaml
 - service.yaml
 - cert.yaml

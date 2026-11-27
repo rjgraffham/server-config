@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: navidrome-syncthing-data
+spec:
+  hostPath:
+    path: /var/lib/cluster-data/syncthing
+    type: DirectoryOrCreate
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 60Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: navidrome-syncthing-data-claim
+  namespace: navidrome
+spec:
+  storageClassName: ""
+  volumeName: navidrome-syncthing-data
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 60Gi
