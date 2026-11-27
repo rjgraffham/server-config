@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkding
-  namespace: default
+  namespace: linkding
 spec:
   replicas: 1
   selector:
@@ -31,7 +31,7 @@ spec:
         - name: LD_DB_DATABASE
           value: linkding
         - name: LD_DB_HOST
-          value: linkding-postgres-rw
+          value: postgres-rw.linkding.svc.cluster.local
         - name: LD_DB_USER
           valueFrom:
             secretKeyRef:
