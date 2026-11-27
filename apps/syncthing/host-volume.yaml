@@ -15,7 +15,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: syncthing-data-claim
-  namespace: default
+  namespace: syncthing
 spec:
   storageClassName: ""
   volumeName: syncthing-data
